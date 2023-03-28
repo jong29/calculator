@@ -22,13 +22,13 @@ function divide(a, b) {
 }
 
 function operate(operator, a, b) {
-    if (operator = "+") {
+    if (operator = "add") {
         return add(a, b);
-    } else if (operator = "-") {
+    } else if (operator = "subtract") {
         return subtract(a, b);
-    } else if (operator = "*") {
+    } else if (operator = "multiply") {
         return mutliply(a, b);
-    } else if (operator = "/") {
+    } else if (operator = "divide") {
         return divide(a, b);
     }
 }
@@ -52,7 +52,7 @@ const operators = document.querySelectorAll('.operator');
 operators.forEach((e) => {
     const i = e.textContent;
     e.addEventListener("click", (e) => {
-        operator = e.target.textContent;
+        operator = e.target.id;
         console.log(operator);
     });
 });
@@ -61,4 +61,11 @@ const equal = document.getElementById("equals").addEventListener("click", () => 
     const result = operate(operator, op1, op2);
     display(result);
     op2 = result;
+});
+
+const clear = document.getElementById("clear").addEventListener("click", () => {
+    op1 = 0;
+    op2 = 0;
+    operator = "";
+    display("");
 });
