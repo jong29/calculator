@@ -4,6 +4,8 @@ let displayValue;
 let op1;
 let op2;
 let operator;
+let opmode = false;
+let disBuf = "";
 
 function add(a, b) {
     return a + b;
@@ -42,9 +44,15 @@ const numbers = document.querySelectorAll(".number");
 numbers.forEach((e) => {
     const i = e.textContent;
     e.addEventListener("click", (e) => {
-        op1 = op2;
-        op2 = parseInt(i);
-        display(i);
+        if (opmode) {
+            op1 = op2;
+            disBuf = i;
+            opmode = false;
+        } else {
+            disBuf += i;
+        }
+        op2 = parseInt(disBuf);
+        display(disBuf);
     });
 });
 
@@ -53,6 +61,7 @@ operators.forEach((e) => {
     const i = e.textContent;
     e.addEventListener("click", (e) => {
         operator = e.target.id;
+        opmode = true;
     });
 });
 
@@ -61,11 +70,13 @@ const equal = document.getElementById("equals").addEventListener("click", () => 
     let result = operate(operator, op1, op2);
     display(result);
     op2 = result;
+    opmode = true;
 });
 
 const clear = document.getElementById("clear").addEventListener("click", () => {
     op1 = 0;
     op2 = 0;
     operator = "";
+    opmode = true;
     display("");
 });
