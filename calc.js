@@ -1,5 +1,9 @@
 // Functions
-
+// Variables
+let displayValue;
+let op1;
+let op2;
+let operator;
 
 function add(a, b) {
     return a + b;
@@ -34,16 +38,12 @@ function display(displayValue) {
     disV.textContent = displayValue;
 }
 
-// Variables
-let displayValue;
-let op1;
-let op2;
-let operator;
-
 const numbers = document.querySelectorAll(".number");
 numbers.forEach((e) => {
     const i = e.textContent;
     e.addEventListener("click", (e) => {
+        op1 = op2;
+        op2 = parseInt(i);
         display(i);
     });
 });
@@ -52,10 +52,13 @@ const operators = document.querySelectorAll('.operator');
 operators.forEach((e) => {
     const i = e.textContent;
     e.addEventListener("click", (e) => {
-        const op1d = document.querySelector(".display");
-        op1 = op1d.textContent;
-        operator = e.textContent;
+        operator = e.target.textContent;
+        console.log(operator);
     });
 });
 
-const equal = document.getElementById("equals").addEventListener('click', )
+const equal = document.getElementById("equals").addEventListener("click", () => {
+    const result = operate(operator, op1, op2);
+    display(result);
+    op2 = result;
+});
